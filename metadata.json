@@ -1,0 +1,6 @@
+{
+  "name": "Aarunya Heritage - Luxury Sarees & Handlooms",
+  "description": "Premium mobile-first e-commerce store for traditional Indian sarees, lehengas, and handloom weaves.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

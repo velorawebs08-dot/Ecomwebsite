@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary: #4A1D4F;
+    --color-ivory: #FAF6F0;
+    --color-gold: #B8935A;
+    --color-charcoal: #1E1A24;
+    --color-blush: #F3E6EA;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+.font-serif {
+  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+}
+
+.font-sans {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom hairline borders and gold accents */
+.border-gold-hairline {
+  border-color: rgba(184, 147, 90, 0.25);
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(184, 147, 90, 0.15), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Hide scrollbars for clean category horizontal scrolls while keeping functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
