@@ -73,9 +73,9 @@ export const BestSellersCarousel: React.FC = () => {
           ref={scrollContainerRef}
           className="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-4 px-1"
         >
-          {bestSellers.map((product) => (
+          {bestSellers.map((product, idx) => (
             <div key={product.id} className="w-[260px] sm:w-[290px] shrink-0">
-              <ProductCard product={product} />
+              <ProductCard product={product} priority={idx < 4} />
             </div>
           ))}
         </div>

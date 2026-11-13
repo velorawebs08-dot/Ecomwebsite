@@ -59,6 +59,8 @@ export interface ProductDetailItem {
 export interface ProductColor {
   name: string;
   hex: string;
+  image?: string;
+  fullImage?: string;
 }
 
 export interface ProductItem {
@@ -79,7 +81,9 @@ export interface ProductItem {
   details: ProductDetailItem[];
   careInstructions: LocalizedString;
   image: string;
+  fullImage?: string;
   images: string[];
+  fullImages?: string[];
   imagePrompts?: string[];
 }
 
@@ -585,15 +589,19 @@ export const siteData = {
       "mr": "जांभळा आणि सोनेरी"
     },
     "colors": [
-      {
-        "name": "Royal Purple",
-        "hex": "#4A1D4F"
-      },
-      {
-        "name": "Gold",
-        "hex": "#B8935A"
-      }
-    ],
+            {
+                  "name": "Royal Purple",
+                  "hex": "#4A1D4F",
+                  "fullImage": "https://i.postimg.cc/MzwnLwSf/Banarasi.webp",
+                  "image": "https://i.postimg.cc/v4Vwk2WK/Banarasi.webp"
+            },
+            {
+                  "name": "Gold",
+                  "hex": "#B8935A",
+                  "fullImage": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "Bestseller",
     "shortDescription": {
       "en": "Handwoven in Varanasi with antique gold zari kadwa motifs and an elaborate regal pallu.",
@@ -670,8 +678,14 @@ export const siteData = {
       "mr": "सुती कापडात गुंडाळून ठेवा. जरीवर थेट अत्तर शिंपडू नका. ६ महिन्यातून एकदा सावलीत हवा द्या."
     },
     "image": "https://i.postimg.cc/v4Vwk2WK/Banarasi.webp",
+    "fullImage": "https://i.postimg.cc/MzwnLwSf/Banarasi.webp",
+    "fullImages": [
+      "https://i.postimg.cc/MzwnLwSf/Banarasi.webp",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/v4Vwk2WK/Banarasi.webp"
+      "https://i.postimg.cc/v4Vwk2WK/Banarasi.webp",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -695,15 +709,19 @@ export const siteData = {
       "mr": "रॉयल ब्लू आणि सोनेरी"
     },
     "colors": [
-      {
-        "name": "Royal Blue",
-        "hex": "#1A2B4C"
-      },
-      {
-        "name": "Gold",
-        "hex": "#B8935A"
-      }
-    ],
+            {
+                  "name": "Royal Blue",
+                  "hex": "#1A2B4C",
+                  "fullImage": "https://i.postimg.cc/bpkGLJKr/ZARI-PALLU-IMG-2.webp",
+                  "image": "https://i.postimg.cc/9rSjxHqL/ZARI-PALLU-IMG-2.webp"
+            },
+            {
+                  "name": "Gold",
+                  "hex": "#B8935A",
+                  "fullImage": "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "Bestseller",
     "shortDescription": {
       "en": "Regal royal blue pure silk saree with heavy antique gold zari brocade pallu.",
@@ -780,8 +798,14 @@ export const siteData = {
       "mr": "केवळ ड्राय क्लीन. सुती पिशवीत ठेवा."
     },
     "image": "https://i.postimg.cc/9rSjxHqL/ZARI-PALLU-IMG-2.webp",
+    "fullImage": "https://i.postimg.cc/bpkGLJKr/ZARI-PALLU-IMG-2.webp",
+    "fullImages": [
+      "https://i.postimg.cc/bpkGLJKr/ZARI-PALLU-IMG-2.webp",
+      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/9rSjxHqL/ZARI-PALLU-IMG-2.webp"
+      "https://i.postimg.cc/9rSjxHqL/ZARI-PALLU-IMG-2.webp",
+      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -805,15 +829,19 @@ export const siteData = {
       "mr": "हिरवा आणि सोनेरी"
     },
     "colors": [
-      {
-        "name": "Emerald Green",
-        "hex": "#1B4D3E"
-      },
-      {
-        "name": "Gold",
-        "hex": "#B8935A"
-      }
-    ],
+            {
+                  "name": "Emerald Green",
+                  "hex": "#1B4D3E",
+                  "fullImage": "https://i.postimg.cc/0PD6ZQLr/Tusar-img-3.webp",
+                  "image": "https://i.postimg.cc/Mv48sJjs/Tusar-img-3.webp"
+            },
+            {
+                  "name": "Gold",
+                  "hex": "#B8935A",
+                  "fullImage": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "Exclusive",
     "shortDescription": {
       "en": "Rich jewel-toned wild tussar silk with natural texture and antique gold borders.",
@@ -890,8 +918,14 @@ export const siteData = {
       "mr": "सावलीत ठेवा, सुती कापडात गुंडाळा."
     },
     "image": "https://i.postimg.cc/Mv48sJjs/Tusar-img-3.webp",
+    "fullImage": "https://i.postimg.cc/0PD6ZQLr/Tusar-img-3.webp",
+    "fullImages": [
+      "https://i.postimg.cc/0PD6ZQLr/Tusar-img-3.webp",
+      "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/Mv48sJjs/Tusar-img-3.webp"
+      "https://i.postimg.cc/Mv48sJjs/Tusar-img-3.webp",
+      "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -915,15 +949,19 @@ export const siteData = {
       "mr": "इंडिगो ब्लू आणि पांढरा"
     },
     "colors": [
-      {
-        "name": "Indigo Blue",
-        "hex": "#1F3A60"
-      },
-      {
-        "name": "Off White",
-        "hex": "#FAF6F0"
-      }
-    ],
+            {
+                  "name": "Indigo Blue",
+                  "hex": "#1F3A60",
+                  "fullImage": "https://i.postimg.cc/hcTJMjHS/IMG-4.webp",
+                  "image": "https://i.postimg.cc/6ySNHxGL/IMG-4.webp"
+            },
+            {
+                  "name": "Off White",
+                  "hex": "#FAF6F0",
+                  "fullImage": "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "Bestseller",
     "shortDescription": {
       "en": "Fine handloom indigo cotton woven with thin zari pinstripes and geometric temple border.",
@@ -1000,8 +1038,14 @@ export const siteData = {
       "mr": "वेगळे धुवा. कडक हवे असल्यास किंचित खळ लावा. सावलीत वाळवा."
     },
     "image": "https://i.postimg.cc/6ySNHxGL/IMG-4.webp",
+    "fullImage": "https://i.postimg.cc/hcTJMjHS/IMG-4.webp",
+    "fullImages": [
+      "https://i.postimg.cc/hcTJMjHS/IMG-4.webp",
+      "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/6ySNHxGL/IMG-4.webp"
+      "https://i.postimg.cc/6ySNHxGL/IMG-4.webp",
+      "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -1025,15 +1069,19 @@ export const siteData = {
       "mr": "टील आणि सोनेरी"
     },
     "colors": [
-      {
-        "name": "Teal",
-        "hex": "#005F73"
-      },
-      {
-        "name": "Gold",
-        "hex": "#B8935A"
-      }
-    ],
+            {
+                  "name": "Teal",
+                  "hex": "#005F73",
+                  "fullImage": "https://i.postimg.cc/TfgyQwZP/IMG-5.webp",
+                  "image": "https://i.postimg.cc/gn5PMb64/IMG-5.webp"
+            },
+            {
+                  "name": "Gold",
+                  "hex": "#B8935A",
+                  "fullImage": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "New",
     "shortDescription": {
       "en": "Lightweight sheer teal Chanderi with fine gold coin buttas and zari borders.",
@@ -1110,8 +1158,14 @@ export const siteData = {
       "mr": "ड्राय क्लीन करा. सुती पिशवीत ठेवा."
     },
     "image": "https://i.postimg.cc/gn5PMb64/IMG-5.webp",
+    "fullImage": "https://i.postimg.cc/TfgyQwZP/IMG-5.webp",
+    "fullImages": [
+      "https://i.postimg.cc/TfgyQwZP/IMG-5.webp",
+      "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/gn5PMb64/IMG-5.webp"
+      "https://i.postimg.cc/gn5PMb64/IMG-5.webp",
+      "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -1135,15 +1189,19 @@ export const siteData = {
       "mr": "राणी पिंक आणि मस्टर्ड"
     },
     "colors": [
-      {
-        "name": "Rani Pink",
-        "hex": "#C71585"
-      },
-      {
-        "name": "Mustard",
-        "hex": "#E1AD01"
-      }
-    ],
+            {
+                  "name": "Rani Pink",
+                  "hex": "#C71585",
+                  "fullImage": "https://i.postimg.cc/kq3GVCBG/IMG-6.webp",
+                  "image": "https://i.postimg.cc/svMkGH0T/IMG-6.webp"
+            },
+            {
+                  "name": "Mustard",
+                  "hex": "#E1AD01",
+                  "fullImage": "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "-20%",
     "shortDescription": {
       "en": "Authentic tie-dye Kutchi Bandhani on ultra-soft pure mulmul with golden gota borders.",
@@ -1220,8 +1278,14 @@ export const siteData = {
       "mr": "बांधणीचे सुरकुत्यांचे सौंदर्य टिकवण्यासाठी ड्राय क्लीन करा."
     },
     "image": "https://i.postimg.cc/svMkGH0T/IMG-6.webp",
+    "fullImage": "https://i.postimg.cc/kq3GVCBG/IMG-6.webp",
+    "fullImages": [
+      "https://i.postimg.cc/kq3GVCBG/IMG-6.webp",
+      "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/svMkGH0T/IMG-6.webp"
+      "https://i.postimg.cc/svMkGH0T/IMG-6.webp",
+      "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -1245,15 +1309,19 @@ export const siteData = {
       "mr": "पीच आणि शॅम्पेन"
     },
     "colors": [
-      {
-        "name": "Soft Peach",
-        "hex": "#FFDAB9"
-      },
-      {
-        "name": "Champagne",
-        "hex": "#F7E7CE"
-      }
-    ],
+            {
+                  "name": "Soft Peach",
+                  "hex": "#FFDAB9",
+                  "fullImage": "https://i.postimg.cc/5bdyHJjh/IMG-7.webp",
+                  "image": "https://i.postimg.cc/fJVGSqgS/IMG-7.webp"
+            },
+            {
+                  "name": "Champagne",
+                  "hex": "#F7E7CE",
+                  "fullImage": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "-20%",
     "shortDescription": {
       "en": "Airy translucent peach georgette embellished with delicate tonal threadwork and scalloped pearl border.",
@@ -1330,8 +1398,14 @@ export const siteData = {
       "mr": "मोत्यांच्या काठाची काळजी घ्या. पिळू नका. पॅडेड हँगरवर ठेवा."
     },
     "image": "https://i.postimg.cc/fJVGSqgS/IMG-7.webp",
+    "fullImage": "https://i.postimg.cc/5bdyHJjh/IMG-7.webp",
+    "fullImages": [
+      "https://i.postimg.cc/5bdyHJjh/IMG-7.webp",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/fJVGSqgS/IMG-7.webp"
+      "https://i.postimg.cc/fJVGSqgS/IMG-7.webp",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -1355,15 +1429,19 @@ export const siteData = {
       "mr": "वाइन रेड आणि सोनेरी"
     },
     "colors": [
-      {
-        "name": "Wine Red",
-        "hex": "#722F37"
-      },
-      {
-        "name": "Gold",
-        "hex": "#B8935A"
-      }
-    ],
+            {
+                  "name": "Wine Red",
+                  "hex": "#722F37",
+                  "fullImage": "https://i.postimg.cc/c0yCKWrW/IMG-8.webp",
+                  "image": "https://i.postimg.cc/QHF2KYnc/IMG-8.webp"
+            },
+            {
+                  "name": "Gold",
+                  "hex": "#B8935A",
+                  "fullImage": "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "Exclusive",
     "shortDescription": {
       "en": "Pure khaddi georgette handwoven in Banaras with antique gold zari shikargah motifs.",
@@ -1440,8 +1518,14 @@ export const siteData = {
       "mr": "केवळ ड्राय क्लीन. मलमलच्या कपड्यात ठेवा."
     },
     "image": "https://i.postimg.cc/QHF2KYnc/IMG-8.webp",
+    "fullImage": "https://i.postimg.cc/c0yCKWrW/IMG-8.webp",
+    "fullImages": [
+      "https://i.postimg.cc/c0yCKWrW/IMG-8.webp",
+      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/QHF2KYnc/IMG-8.webp"
+      "https://i.postimg.cc/QHF2KYnc/IMG-8.webp",
+      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -1465,15 +1549,19 @@ export const siteData = {
       "mr": "पेस्टेल पिंक आणि चंदेरी"
     },
     "colors": [
-      {
-        "name": "Pastel Pink",
-        "hex": "#F8C8DC"
-      },
-      {
-        "name": "Silver",
-        "hex": "#C0C0C0"
-      }
-    ],
+            {
+                  "name": "Pastel Pink",
+                  "hex": "#F8C8DC",
+                  "fullImage": "https://i.postimg.cc/3Y5NyhWP/IMG-9.webp",
+                  "image": "https://i.postimg.cc/9rD6wgNR/IMG-9.webp"
+            },
+            {
+                  "name": "Silver",
+                  "hex": "#C0C0C0",
+                  "fullImage": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "New",
     "shortDescription": {
       "en": "Featherlight powder pink chiffon georgette with delicate silver mukaish and scalloped border.",
@@ -1550,8 +1638,14 @@ export const siteData = {
       "mr": "पिळू नका. टिश्यू पेपरमध्ये घडी करून ठेवा."
     },
     "image": "https://i.postimg.cc/9rD6wgNR/IMG-9.webp",
+    "fullImage": "https://i.postimg.cc/3Y5NyhWP/IMG-9.webp",
+    "fullImages": [
+      "https://i.postimg.cc/3Y5NyhWP/IMG-9.webp",
+      "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/9rD6wgNR/IMG-9.webp"
+      "https://i.postimg.cc/9rD6wgNR/IMG-9.webp",
+      "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -1575,15 +1669,19 @@ export const siteData = {
       "mr": "मरून आणि सोनेरी"
     },
     "colors": [
-      {
-        "name": "Deep Maroon",
-        "hex": "#631A24"
-      },
-      {
-        "name": "Temple Gold",
-        "hex": "#D4AF37"
-      }
-    ],
+            {
+                  "name": "Deep Maroon",
+                  "hex": "#631A24",
+                  "fullImage": "https://i.postimg.cc/pRbr9vpx/IMG-10.webp",
+                  "image": "https://i.postimg.cc/crvptk5Q/IMG-10.webp"
+            },
+            {
+                  "name": "Temple Gold",
+                  "hex": "#D4AF37",
+                  "fullImage": "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "Bestseller",
     "shortDescription": {
       "en": "Heavyweight Kanchipuram silk with contrast gold zari temple korvai border and coin buttas.",
@@ -1660,8 +1758,14 @@ export const siteData = {
       "mr": "सुती पिशवीत ठेवा. दर ४ महिन्यांनी घडी बदला."
     },
     "image": "https://i.postimg.cc/crvptk5Q/IMG-10.webp",
+    "fullImage": "https://i.postimg.cc/pRbr9vpx/IMG-10.webp",
+    "fullImages": [
+      "https://i.postimg.cc/pRbr9vpx/IMG-10.webp",
+      "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/crvptk5Q/IMG-10.webp"
+      "https://i.postimg.cc/crvptk5Q/IMG-10.webp",
+      "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -1685,15 +1789,19 @@ export const siteData = {
       "mr": "मस्टर्ड आणि लाल"
     },
     "colors": [
-      {
-        "name": "Mustard",
-        "hex": "#E1AD01"
-      },
-      {
-        "name": "Crimson Red",
-        "hex": "#990000"
-      }
-    ],
+            {
+                  "name": "Mustard",
+                  "hex": "#E1AD01",
+                  "fullImage": "https://i.postimg.cc/44TG3JwS/IMG-11.webp",
+                  "image": "https://i.postimg.cc/rR0fs3Fs/IMG-11.webp"
+            },
+            {
+                  "name": "Crimson Red",
+                  "hex": "#990000",
+                  "fullImage": "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "-20%",
     "shortDescription": {
       "en": "Auspicious turmeric mustard silk with crimson red contrast temple spire border and rudraksha zari.",
@@ -1770,8 +1878,14 @@ export const siteData = {
       "mr": "ओलाव्यापासून दूर ठेवा. कडुनिंबाची पाने पिशवीबाहेर ठेवा."
     },
     "image": "https://i.postimg.cc/rR0fs3Fs/IMG-11.webp",
+    "fullImage": "https://i.postimg.cc/44TG3JwS/IMG-11.webp",
+    "fullImages": [
+      "https://i.postimg.cc/44TG3JwS/IMG-11.webp",
+      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/rR0fs3Fs/IMG-11.webp"
+      "https://i.postimg.cc/rR0fs3Fs/IMG-11.webp",
+      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -1795,15 +1909,19 @@ export const siteData = {
       "mr": "बॉटल ग्रीन आणि सोनेरी"
     },
     "colors": [
-      {
-        "name": "Bottle Green",
-        "hex": "#004B23"
-      },
-      {
-        "name": "Gold",
-        "hex": "#B8935A"
-      }
-    ],
+            {
+                  "name": "Bottle Green",
+                  "hex": "#004B23",
+                  "fullImage": "https://i.postimg.cc/kMdC5nwR/IMG-12.webp",
+                  "image": "https://i.postimg.cc/1VnvX2Rd/IMG-12.webp"
+            },
+            {
+                  "name": "Gold",
+                  "hex": "#B8935A",
+                  "fullImage": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "New",
     "shortDescription": {
       "en": "Vibrant bottle green silk with multi-colored Meenakari floral threadwork and golden borders.",
@@ -1880,8 +1998,14 @@ export const siteData = {
       "mr": "ओलाव्यापासून दूर ठेवा. इस्त्री करताना उलट्या बाजूने करा."
     },
     "image": "https://i.postimg.cc/1VnvX2Rd/IMG-12.webp",
+    "fullImage": "https://i.postimg.cc/kMdC5nwR/IMG-12.webp",
+    "fullImages": [
+      "https://i.postimg.cc/kMdC5nwR/IMG-12.webp",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/1VnvX2Rd/IMG-12.webp"
+      "https://i.postimg.cc/1VnvX2Rd/IMG-12.webp",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -1905,15 +2029,19 @@ export const siteData = {
       "mr": "काळी आणि सोनेरी"
     },
     "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#1A1A1A"
-      },
-      {
-        "name": "Liquid Gold",
-        "hex": "#D4AF37"
-      }
-    ],
+            {
+                  "name": "Midnight Black",
+                  "hex": "#1A1A1A",
+                  "fullImage": "https://i.postimg.cc/pWjxx9Q8/img-13.webp",
+                  "image": "https://i.postimg.cc/YGyXpM7J/img-13.webp"
+            },
+            {
+                  "name": "Liquid Gold",
+                  "hex": "#D4AF37",
+                  "fullImage": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "Bestseller",
     "shortDescription": {
       "en": "Dramatic jet black flowing silhouette highlighted with molten gold zari stripes and micro-sequins.",
@@ -1990,8 +2118,14 @@ export const siteData = {
       "mr": "हँगरवर ठेवा. केवळ ड्राय क्लीन."
     },
     "image": "https://i.postimg.cc/YGyXpM7J/img-13.webp",
+    "fullImage": "https://i.postimg.cc/pWjxx9Q8/img-13.webp",
+    "fullImages": [
+      "https://i.postimg.cc/pWjxx9Q8/img-13.webp",
+      "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/YGyXpM7J/img-13.webp"
+      "https://i.postimg.cc/YGyXpM7J/img-13.webp",
+      "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -2015,15 +2149,19 @@ export const siteData = {
       "mr": "लॅव्हेंडर आणि चंदेरी"
     },
     "colors": [
-      {
-        "name": "Lavender",
-        "hex": "#E6E6FA"
-      },
-      {
-        "name": "Silver",
-        "hex": "#C0C0C0"
-      }
-    ],
+            {
+                  "name": "Lavender",
+                  "hex": "#E6E6FA",
+                  "fullImage": "https://i.postimg.cc/PXDhhLbQ/IMG-14.webp",
+                  "image": "https://i.postimg.cc/XGD2V43W/IMG-14.webp"
+            },
+            {
+                  "name": "Silver",
+                  "hex": "#C0C0C0",
+                  "fullImage": "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "New",
     "shortDescription": {
       "en": "Crisp ethereal lavender silk organza hand-painted with silver botanical vines.",
@@ -2100,8 +2238,14 @@ export const siteData = {
       "mr": "तीक्ष्ण घडी करू नका. रोल करून ठेवा."
     },
     "image": "https://i.postimg.cc/XGD2V43W/IMG-14.webp",
+    "fullImage": "https://i.postimg.cc/PXDhhLbQ/IMG-14.webp",
+    "fullImages": [
+      "https://i.postimg.cc/PXDhhLbQ/IMG-14.webp",
+      "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/XGD2V43W/IMG-14.webp"
+      "https://i.postimg.cc/XGD2V43W/IMG-14.webp",
+      "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -2125,15 +2269,19 @@ export const siteData = {
       "mr": "नारंगी आणि सोनेरी"
     },
     "colors": [
-      {
-        "name": "Saffron Orange",
-        "hex": "#FF7722"
-      },
-      {
-        "name": "Gold",
-        "hex": "#B8935A"
-      }
-    ],
+            {
+                  "name": "Saffron Orange",
+                  "hex": "#FF7722",
+                  "fullImage": "https://i.postimg.cc/7Py4LxXz/IMG-15.webp",
+                  "image": "https://i.postimg.cc/sGQTxqfb/IMG-15.webp"
+            },
+            {
+                  "name": "Gold",
+                  "hex": "#B8935A",
+                  "fullImage": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "Bestseller",
     "shortDescription": {
       "en": "Radiant saffron orange silk brocade with all-over golden floral motifs for festive joy.",
@@ -2210,8 +2358,14 @@ export const siteData = {
       "mr": "केवळ ड्राय क्लीन करा. सुती कापडात ठेवा."
     },
     "image": "https://i.postimg.cc/sGQTxqfb/IMG-15.webp",
+    "fullImage": "https://i.postimg.cc/7Py4LxXz/IMG-15.webp",
+    "fullImages": [
+      "https://i.postimg.cc/7Py4LxXz/IMG-15.webp",
+      "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/sGQTxqfb/IMG-15.webp"
+      "https://i.postimg.cc/sGQTxqfb/IMG-15.webp",
+      "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -2235,15 +2389,19 @@ export const siteData = {
       "mr": "आयव्हरी आणि लाल"
     },
     "colors": [
-      {
-        "name": "Ivory White",
-        "hex": "#FAF6F0"
-      },
-      {
-        "name": "Sindoor Red",
-        "hex": "#C41E3A"
-      }
-    ],
+            {
+                  "name": "Ivory White",
+                  "hex": "#FAF6F0",
+                  "fullImage": "https://i.postimg.cc/y7rzZhvh/IMG-16.webp",
+                  "image": "https://i.postimg.cc/d7snrLVK/IMG-16.webp"
+            },
+            {
+                  "name": "Sindoor Red",
+                  "hex": "#C41E3A",
+                  "fullImage": "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "Bestseller",
     "shortDescription": {
       "en": "Classic Bengali Lal-Paar style ivory handloom cotton saree with temple red border and tassels.",
@@ -2320,8 +2478,14 @@ export const siteData = {
       "mr": "थंड पाण्यात धुवा. सावलीत उलट्या बाजूने वाळवा."
     },
     "image": "https://i.postimg.cc/d7snrLVK/IMG-16.webp",
+    "fullImage": "https://i.postimg.cc/y7rzZhvh/IMG-16.webp",
+    "fullImages": [
+      "https://i.postimg.cc/y7rzZhvh/IMG-16.webp",
+      "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/d7snrLVK/IMG-16.webp"
+      "https://i.postimg.cc/d7snrLVK/IMG-16.webp",
+      "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -2345,15 +2509,19 @@ export const siteData = {
       "mr": "सी ग्रीन आणि आयव्हरी"
     },
     "colors": [
-      {
-        "name": "Sea Green",
-        "hex": "#2E8B57"
-      },
-      {
-        "name": "Ivory",
-        "hex": "#FAF6F0"
-      }
-    ],
+            {
+                  "name": "Sea Green",
+                  "hex": "#2E8B57",
+                  "fullImage": "https://i.postimg.cc/s30RhPw7/IMG-17.webp",
+                  "image": "https://i.postimg.cc/d7snrLtb/IMG-17.webp"
+            },
+            {
+                  "name": "Ivory",
+                  "hex": "#FAF6F0",
+                  "fullImage": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90",
+                  "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
+            }
+      ],
     "badge": "New",
     "shortDescription": {
       "en": "Handwoven 100-count organic flax linen with subtle silver zari border and handmade pom-pom tassels.",
@@ -2430,8 +2598,14 @@ export const siteData = {
       "mr": "थंड पाण्यात धुवा. किंचित दमट असताना इस्त्री करा."
     },
     "image": "https://i.postimg.cc/d7snrLtb/IMG-17.webp",
+    "fullImage": "https://i.postimg.cc/s30RhPw7/IMG-17.webp",
+    "fullImages": [
+      "https://i.postimg.cc/s30RhPw7/IMG-17.webp",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/d7snrLtb/IMG-17.webp"
+      "https://i.postimg.cc/d7snrLtb/IMG-17.webp",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90"
     ]
   },
   {
@@ -2540,8 +2714,14 @@ export const siteData = {
       "mr": "पांढऱ्या मलमलच्या कपड्यात गुंडाळून ठेवा. वर्षातून दोनदा घडी बदला."
     },
     "image": "https://i.postimg.cc/06kZDbys/IMG-18.webp",
+    "fullImage": "https://i.postimg.cc/hK3qd8pb/IMG-18.webp",
+    "fullImages": [
+      "https://i.postimg.cc/hK3qd8pb/IMG-18.webp",
+      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
+    ],
     "images": [
-      "https://i.postimg.cc/06kZDbys/IMG-18.webp"
+      "https://i.postimg.cc/06kZDbys/IMG-18.webp",
+      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90"
     ]
   }
 ] as ProductItem[],

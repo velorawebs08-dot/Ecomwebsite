@@ -3,12 +3,13 @@
  * SPDX-License-Identifier: Apache-2.0
  * 
  * ProductCard.tsx - Premium E-commerce product card
- * - Aspect ratio: 3 / 4, full card width, overflow: hidden
- * - Image fills box fully: object-fit: cover, object-position: center 25%, no empty space
- * - No hover effects (no second image, no zoom, no lift, no shadow change)
- * - Single image per product (uses product.image or product.images[0])
- * - Plain blush #F3E6EA box on image load error
- * - Color text line "Available in [Colours]" (no color circles or "2 shades")
+ * - Fixed aspect-ratio: 4/5, full card width, overflow: hidden
+ * - Image fills box: object-fit: cover, object-position: top center (no stretching)
+ * - Sharp rendering: transform: translateZ(0), willChange: transform
+ * - Hover zoom: max scale(1.05) with translateZ(0) to avoid soft rendering
+ * - Plain blush #F3E6EA fallback on error
+ * - Color text line "Available in [Colours]"
+ * - decoding="async", priority support
  */
 
 import React, { useState } from 'react';
@@ -23,7 +24,7 @@ interface ProductCardProps {
   priority?: boolean;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false }) => {
   const { toggleWishlist, isInWishlist, addToCart, t, language } = useStore();
   const [justAdded, setJustAdded] = useState(false);
   const [showSizePicker, setShowSizePicker] = useState(false);
@@ -49,18 +50,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div
-      className="relative flex flex-col bg-white rounded-xl overflow-hidden border border-[#B8935A]/15 shadow-2xs"
+      className="group relative flex flex-col bg-white rounded-xl overflow-hidden border border-[#B8935A]/15 shadow-2xs hover:border-[#B8935A]/35 transition-colors"
       onMouseLeave={() => setShowSizePicker(false)}
     >
-      {/* Card Image Box: aspect-ratio: 3 / 4, full width, overflow: hidden */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#FAF6F0]">
-        <Link to={`/product/${product.id}`} className="block w-full h-full">
+      {/* Card Image Box: aspect-ratio: 4 / 5, full width, overflow: hidden */}
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#FAF6F0]">
+        <Link to={`/product/${product.id}`} className="block w-full h-full overflow-hidden">
           <ImageWithFallback
             src={productImage}
             alt={productName}
-            loading="lazy"
-            style={{ objectPosition: 'center 25%' }}
-            className="w-full h-full object-cover"
+            priority={priority}
+            style={{
+              objectPosition: 'top center',
+              transform: 'translateZ(0)',
+              willChange: 'transform',
+            }}
+            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
             fallbackText={productName}
           />
         </Link>

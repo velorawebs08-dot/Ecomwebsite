@@ -13,6 +13,10 @@
     scroll-behavior: smooth;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
+
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
 }
 
 .font-serif {

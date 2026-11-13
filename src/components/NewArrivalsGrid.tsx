@@ -46,8 +46,8 @@ export const NewArrivalsGrid: React.FC = () => {
 
         {/* 4-column grid (2 cols on mobile, 3 cols tablet, 4 cols desktop) */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {newArrivals.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {newArrivals.map((product, idx) => (
+            <ProductCard key={product.id} product={product} priority={idx < 4} />
           ))}
         </div>
       </div>

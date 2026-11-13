@@ -6,13 +6,14 @@
  * pincode check, WhatsApp order, reviews, accordions & related recommendations.
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { siteData, BLOUSE_SIZES, ProductItem } from '../data/siteData.ts';
 import { useStore } from '../context/StoreContext.tsx';
 import { ImageWithFallback } from '../components/ImageWithFallback.tsx';
 import { SizeChartModal } from '../components/SizeChartModal.tsx';
 import { ProductCard } from '../components/ProductCard.tsx';
+import { getHighResImageUrl } from '../utils/imageUtils.ts';
 import {
   Star,
   Heart,
@@ -31,6 +32,12 @@ import {
   Minus,
   Sparkles,
   ArrowLeft,
+  Maximize2,
+  X,
+  ZoomIn,
+  ZoomOut,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 
 export const ProductDetailPage: React.FC = () => {
@@ -42,11 +49,15 @@ export const ProductDetailPage: React.FC = () => {
     return siteData.products.find((p) => p.id === id || p.slug === id);
   }, [id]);
 
-  // Gallery state
+  // Gallery & High-Res Zoom state
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState<string>(
     product?.colors[0]?.name || 'Standard'
   );
+  const [selectedColorImage, setSelectedColorImage] = useState<string | null>(null);
+  const [isZoomOpen, setIsZoomOpen] = useState(false);
+  const [isMagnified, setIsMagnified] = useState(false);
+  const [zoomCoords, setZoomCoords] = useState({ x: 50, y: 50 });
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [sizeError, setSizeError] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -95,6 +106,56 @@ export const ProductDetailPage: React.FC = () => {
     '3. Fabric Macro',
     '4. Styled Look',
   ];
+
+  // Active images array and current high-res master
+  const galleryFullImages = useMemo(() => {
+    if (!product) return [];
+    if (product.fullImages && product.fullImages.length > 0) {
+      return product.fullImages;
+    }
+    return product.images.map((img) => getHighResImageUrl(img));
+  }, [product]);
+
+  const activeMainImage = useMemo(() => {
+    if (selectedColorImage) return getHighResImageUrl(selectedColorImage);
+    if (galleryFullImages[activeImageIndex]) return galleryFullImages[activeImageIndex];
+    if (product?.fullImage) return product.fullImage;
+    return getHighResImageUrl(product?.image || product?.images[0]);
+  }, [selectedColorImage, galleryFullImages, activeImageIndex, product]);
+
+  // Keyboard navigation for Lightbox
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (!isZoomOpen) return;
+      if (e.key === 'Escape') {
+        setIsZoomOpen(false);
+        setIsMagnified(false);
+      } else if (e.key === 'ArrowRight' && galleryFullImages.length > 1) {
+        setSelectedColorImage(null);
+        setActiveImageIndex((prev) => (prev + 1) % galleryFullImages.length);
+      } else if (e.key === 'ArrowLeft' && galleryFullImages.length > 1) {
+        setSelectedColorImage(null);
+        setActiveImageIndex((prev) => (prev - 1 + galleryFullImages.length) % galleryFullImages.length);
+      }
+    },
+    [isZoomOpen, galleryFullImages.length]
+  );
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
+
+  // Reset zoom and selected color when product changes
+  useEffect(() => {
+    setActiveImageIndex(0);
+    setSelectedColorImage(null);
+    setIsZoomOpen(false);
+    setIsMagnified(false);
+    if (product?.colors[0]?.name) {
+      setSelectedColor(product.colors[0].name);
+    }
+  }, [product?.id]);
 
   // Handle Add to Cart
   const handleAddToCart = () => {
@@ -185,12 +246,30 @@ export const ProductDetailPage: React.FC = () => {
           <div className="lg:col-span-7 flex flex-col gap-4">
             
             {/* Main Big Image */}
-            <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden bg-white shadow-md border border-[#B8935A]/25">
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => setIsZoomOpen(true)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setIsZoomOpen(true);
+                }
+              }}
+              className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-white shadow-md border border-[#B8935A]/25 cursor-zoom-in group/main-img focus:outline-none focus:ring-2 focus:ring-[#4A1D4F]"
+              aria-label="Click to zoom saree image in high resolution"
+            >
               <ImageWithFallback
-                src={product.image || product.images[activeImageIndex] || product.images[0]}
+                src={activeMainImage}
+                highResSrc={activeMainImage}
                 alt={t(product.name)}
-                style={{ objectPosition: 'center 25%' }}
-                className="w-full h-full object-cover"
+                priority={true}
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                style={{
+                  objectPosition: 'top center',
+                  transform: 'translateZ(0)',
+                  willChange: 'transform',
+                }}
+                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/main-img:scale-[1.03]"
                 fallbackText={t(product.name)}
               />
 
@@ -210,7 +289,10 @@ export const ProductDetailPage: React.FC = () => {
 
               {/* Wishlist button */}
               <button
-                onClick={() => toggleWishlist(product.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleWishlist(product.id);
+                }}
                 className={`absolute top-4 right-4 p-3 rounded-full backdrop-blur-md transition-all z-10 ${
                   isFavorited
                     ? 'bg-red-50 text-red-600 shadow-md'
@@ -221,39 +303,59 @@ export const ProductDetailPage: React.FC = () => {
                 <Heart className={`w-5 h-5 ${isFavorited ? 'fill-current' : ''}`} />
               </button>
 
-              {/* Current view indicator pill (only shown if multiple images exist) */}
-              {product.images.length > 1 && (
-                <div className="absolute bottom-4 left-4 bg-black/60 text-white text-[11px] px-3 py-1 rounded-full backdrop-blur-xs font-medium">
-                  {viewLabels[activeImageIndex] || `View ${activeImageIndex + 1}`}
-                </div>
-              )}
+              {/* Current view indicator pill */}
+              <div className="absolute bottom-4 left-4 bg-black/70 text-white text-[11px] px-3 py-1 rounded-full backdrop-blur-xs font-medium z-10 pointer-events-none">
+                {selectedColorImage
+                  ? `Shade: ${selectedColor}`
+                  : (viewLabels[activeImageIndex] || `View ${activeImageIndex + 1}`)}
+              </div>
+
+              {/* Floating Zoom Action Badge */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsZoomOpen(true);
+                }}
+                className="absolute bottom-4 right-4 flex items-center gap-1.5 bg-[#1E1A24]/85 hover:bg-[#4A1D4F] text-[#FAF6F0] px-3.5 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md shadow-lg border border-[#B8935A]/40 transition-all hover:scale-105 z-10 cursor-pointer"
+              >
+                <Maximize2 className="w-3.5 h-3.5 text-[#B8935A]" />
+                <span>Click to Zoom</span>
+              </button>
             </div>
 
-            {/* Thumbnails (Only rendered if more than 1 image exists, otherwise hidden) */}
-            {product.images.length > 1 && (
+            {/* Thumbnails (Rendered if more than 1 image exists) */}
+            {galleryFullImages.length > 1 && (
               <div className="grid grid-cols-4 gap-2 sm:gap-4">
-                {product.images.map((imgUrl, idx) => {
-                  const isActive = idx === activeImageIndex;
+                {galleryFullImages.map((imgUrl, idx) => {
+                  const isActive = idx === activeImageIndex && !selectedColorImage;
                   return (
                     <button
                       key={idx}
-                      onClick={() => setActiveImageIndex(idx)}
-                      className={`relative aspect-[3/4] rounded-xl overflow-hidden bg-white transition-all text-left ${
+                      onClick={() => {
+                        setActiveImageIndex(idx);
+                        setSelectedColorImage(null);
+                      }}
+                      className={`relative aspect-[4/5] rounded-xl overflow-hidden bg-white transition-all text-left ${
                         isActive
                           ? 'border-2 border-[#4A1D4F] ring-2 ring-[#4A1D4F]/30 shadow-md'
                           : 'border border-[#B8935A]/30 opacity-75 hover:opacity-100 hover:border-[#4A1D4F]/50'
                       }`}
                     >
                       <ImageWithFallback
-                        src={imgUrl}
+                        src={product.images[idx] || imgUrl}
+                        highResSrc={imgUrl}
                         alt={`${t(product.name)} thumbnail ${idx + 1}`}
-                        style={{ objectPosition: 'center 25%' }}
+                        style={{
+                          objectPosition: 'top center',
+                          transform: 'translateZ(0)',
+                        }}
                         className="w-full h-full object-cover"
-                        fallbackText={viewLabels[idx]}
+                        fallbackText={viewLabels[idx] || `View ${idx + 1}`}
                       />
                       <div className="absolute inset-x-0 bottom-0 bg-black/70 py-0.5 px-1 text-center">
                         <span className="text-[9px] text-[#FAF6F0] font-medium truncate block">
-                          {viewLabels[idx]}
+                          {viewLabels[idx] || `View ${idx + 1}`}
                         </span>
                       </div>
                     </button>
@@ -329,7 +431,16 @@ export const ProductDetailPage: React.FC = () => {
                   {product.colors.map((color) => (
                     <button
                       key={color.name}
-                      onClick={() => setSelectedColor(color.name)}
+                      onClick={() => {
+                        setSelectedColor(color.name);
+                        if (color.fullImage) {
+                          setSelectedColorImage(color.fullImage);
+                        } else if (color.image) {
+                          setSelectedColorImage(color.image);
+                        } else {
+                          setSelectedColorImage(null);
+                        }
+                      }}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${
                         selectedColor === color.name
                           ? 'border-[#4A1D4F] bg-[#4A1D4F]/5 ring-1 ring-[#4A1D4F]'
@@ -700,6 +811,205 @@ export const ProductDetailPage: React.FC = () => {
         isOpen={isSizeChartOpen}
         onClose={() => setIsSizeChartOpen(false)}
       />
+
+      {/* CLICK-TO-ZOOM HIGH-RESOLUTION LIGHTBOX MODAL */}
+      {isZoomOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="High-resolution image zoom modal"
+          className="fixed inset-0 z-50 bg-[#1E1A24]/95 backdrop-blur-md flex flex-col justify-between select-none animate-fadeIn"
+          onClick={() => {
+            setIsZoomOpen(false);
+            setIsMagnified(false);
+          }}
+        >
+          {/* Top Bar */}
+          <div
+            className="flex items-center justify-between px-4 sm:px-8 py-3.5 border-b border-white/10 bg-black/40 z-20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3">
+              <div>
+                <h3 className="font-serif text-lg sm:text-xl text-white font-medium truncate max-w-md">
+                  {t(product.name)}
+                </h3>
+                <div className="flex items-center gap-2 text-xs text-[#B8935A]">
+                  <span className="capitalize">{product.category}</span>
+                  <span>·</span>
+                  <span>Shade: {selectedColor}</span>
+                  <span>·</span>
+                  <span className="text-gray-300 hidden sm:inline">1600px Ultra HD View · Zari & Pallu Inspector</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Actions: Zoom toggle and Close */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              <button
+                type="button"
+                onClick={() => setIsMagnified(!isMagnified)}
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                  isMagnified
+                    ? 'bg-[#B8935A] text-white border-[#B8935A] shadow-md'
+                    : 'bg-white/10 text-white border-white/20 hover:bg-white/20'
+                }`}
+                aria-label={isMagnified ? 'Reset zoom to 1x' : 'Magnify image 2.5x'}
+              >
+                {isMagnified ? (
+                  <>
+                    <ZoomOut className="w-3.5 h-3.5" />
+                    <span>Reset 1x</span>
+                  </>
+                ) : (
+                  <>
+                    <ZoomIn className="w-3.5 h-3.5" />
+                    <span>2.5x Macro Zoom</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsZoomOpen(false);
+                  setIsMagnified(false);
+                }}
+                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all flex items-center gap-1.5 px-3 text-xs font-semibold cursor-pointer"
+                aria-label="Close image zoom view"
+              >
+                <X className="w-4 h-4" />
+                <span className="hidden sm:inline">ESC</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Center Stage: Image viewport with smooth pan and zoom */}
+          <div
+            className="relative flex-1 flex items-center justify-center p-4 overflow-hidden"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMagnified(!isMagnified);
+            }}
+            onMouseMove={(e) => {
+              if (!isMagnified) return;
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+              const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+              setZoomCoords({ x, y });
+            }}
+          >
+            {/* Left Nav Arrow */}
+            {galleryFullImages.length > 1 && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedColorImage(null);
+                  setActiveImageIndex(
+                    (prev) => (prev - 1 + galleryFullImages.length) % galleryFullImages.length
+                  );
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 backdrop-blur-xs z-30 transition-transform hover:scale-110 cursor-pointer"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            )}
+
+            {/* High-Res Image Container */}
+            <div
+              className={`relative max-w-full max-h-[74vh] flex items-center justify-center transition-transform duration-200 select-none ${
+                isMagnified ? 'cursor-grab' : 'cursor-zoom-in'
+              }`}
+              style={
+                isMagnified
+                  ? {
+                      transform: 'scale(2.4)',
+                      transformOrigin: `${zoomCoords.x}% ${zoomCoords.y}%`,
+                    }
+                  : undefined
+              }
+            >
+              <img
+                src={activeMainImage}
+                alt={t(product.name)}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                style={{
+                  maxHeight: '74vh',
+                  aspectRatio: '4/5',
+                  objectFit: 'contain',
+                  imageRendering: '-webkit-optimize-contrast',
+                  transform: 'translateZ(0)',
+                  willChange: 'transform',
+                }}
+                className="rounded-xl shadow-2xl pointer-events-none"
+              />
+            </div>
+
+            {/* Right Nav Arrow */}
+            {galleryFullImages.length > 1 && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedColorImage(null);
+                  setActiveImageIndex((prev) => (prev + 1) % galleryFullImages.length);
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 backdrop-blur-xs z-30 transition-transform hover:scale-110 cursor-pointer"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            )}
+
+            {/* Zoom helper hint badge */}
+            <div className="absolute bottom-4 inset-x-0 flex justify-center pointer-events-none z-20">
+              <span className="bg-black/75 text-white/90 text-xs px-4 py-1.5 rounded-full border border-white/15 backdrop-blur-xs shadow-md">
+                {isMagnified
+                  ? 'Move mouse to inspect intricate weave & zari detail'
+                  : 'Click anywhere to toggle 2.4x macro zoom'}
+              </span>
+            </div>
+          </div>
+
+          {/* Bottom Thumbnail Strip inside Lightbox */}
+          <div
+            className="px-4 sm:px-8 py-3 bg-black/50 border-t border-white/10 flex items-center justify-center gap-3 overflow-x-auto z-20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {galleryFullImages.map((imgUrl, idx) => {
+              const isActive = idx === activeImageIndex && !selectedColorImage;
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => {
+                    setActiveImageIndex(idx);
+                    setSelectedColorImage(null);
+                  }}
+                  className={`relative w-14 h-16 sm:w-16 sm:h-20 rounded-md overflow-hidden transition-all shrink-0 cursor-pointer ${
+                    isActive
+                      ? 'ring-2 ring-[#B8935A] opacity-100 scale-105 shadow-md'
+                      : 'opacity-50 hover:opacity-100 ring-1 ring-white/20'
+                  }`}
+                >
+                  <img
+                    src={product.images[idx] || imgUrl}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                  <span className="absolute inset-x-0 bottom-0 bg-black/70 text-[9px] text-white text-center py-0.5 truncate px-0.5 font-medium">
+                    {viewLabels[idx] || `View ${idx + 1}`}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

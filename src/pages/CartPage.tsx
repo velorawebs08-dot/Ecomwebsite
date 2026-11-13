@@ -158,8 +158,9 @@ export const CartPage: React.FC = () => {
                       className="w-16 h-20 rounded-lg overflow-hidden bg-[#FAF6F0] shrink-0 border border-gray-100"
                     >
                       <ImageWithFallback
-                        src={item.product.images[0]}
+                        src={item.product.image || item.product.images[0]}
                         alt={t(item.product.name)}
+                        style={{ objectPosition: 'top center' }}
                         className="w-full h-full object-cover"
                         fallbackText={t(item.product.name)}
                       />

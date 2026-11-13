@@ -132,8 +132,9 @@ export const CartDrawer: React.FC = () => {
                     className="w-20 h-24 rounded-lg overflow-hidden shrink-0 bg-[#FAF6F0]"
                   >
                     <ImageWithFallback
-                      src={item.product.images[0]}
+                      src={item.product.image || item.product.images[0]}
                       alt={t(item.product.name)}
+                      style={{ objectPosition: 'top center' }}
                       className="w-full h-full object-cover"
                     />
                   </Link>

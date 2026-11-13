@@ -423,8 +423,8 @@ export const ShopPage: React.FC = () => {
               </div>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-                {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                {filteredProducts.map((product, idx) => (
+                  <ProductCard key={product.id} product={product} priority={idx < 4} />
                 ))}
               </div>
             )}

@@ -101,8 +101,8 @@ export const CategoryPage: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {products.map((product, idx) => (
+              <ProductCard key={product.id} product={product} priority={idx < 4} />
             ))}
           </div>
         )}
